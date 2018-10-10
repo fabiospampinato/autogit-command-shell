@@ -18,17 +18,17 @@ const shell = {
     ['[command]', 'Shell command to execute']
   ],
   plugins: [
-    async function shell ( config, repository, ctx, task ) {
+    async function shell ( config, repoPath, ctx, task ) {
 
       async function run ( command ) {
 
-        task.title = `shell ${chalk.gray ( command )}`;
+        task.title = `shell ${chalk.gray ( command.replace ( /\n/g, '\\n' ) )}`;
 
         if ( config.dry ) return task.skip ();
 
         command = `${command} && exit 0`;
 
-        const {stdout} = await execa.shell ( command, { cwd: repository } );
+        const {stdout} = await execa.shell ( command, { cwd: repoPath } );
 
         task.output = stdout;
 
