@@ -26,13 +26,17 @@ const shell = {
 
         if ( config.dry ) return task.skip ();
 
-        command = `${command} && exit 0`;
+        const hasArguments = /\s/.test ( command );
 
-        const {stdout} = await execa.shell ( command, { cwd: repoPath } );
+        if ( hasArguments ) {
 
-        task.output = stdout;
+          task.output = ( await execa.shell ( `${command} && exit 0`, { cwd: repoPath } ) ).stdout;
 
-        return stdout;
+        } else {
+
+          task.output = ( await execa ( command, { cwd: repoPath } ) ).stdout;
+
+        }
 
       }
 
