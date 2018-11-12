@@ -63,4 +63,4 @@ const shell = {
 
 /* EXPORT */
 
-export = Object.assign ( shell, { default: shell } );
+export default shell;
