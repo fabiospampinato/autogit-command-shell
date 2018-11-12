@@ -1,7 +1,7 @@
 {
   "name": "autogit-command-shell",
   "description": "A command for executing a plain shell command.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
